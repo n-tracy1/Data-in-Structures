@@ -1,0 +1,52 @@
+$primary: rgb(98, 179, 255);
+$secondary: darken($primary, 20%);
+$tertiary: lighten($primary, 25%);
+
+body {
+    margin: 0;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "mainMenu Title .";
+    background: $tertiary;
+
+    #mainMenu {
+        display: flex;
+        align-self: center;
+        justify-content: center;
+
+        button {
+            width: 3em;
+            height: 3em;
+            background-color: $primary;
+            border: solid 2px $secondary; 
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+
+            div {
+                width: 1.5em;
+                height: .1em;
+                background-color: white;
+                border: 1px white solid;
+                border-radius: 2px;
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: darken($primary, 10%)
+            }
+        }
+
+    }
+
+    h1 {
+        text-align: center;
+    }
+}
+
