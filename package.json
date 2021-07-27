@@ -5,18 +5,31 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js",
-
+    "start": "NODE_ENV=production node server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve --open"
   },
   "author": "Nate",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.13.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "webpack": "^5.47.0"
   },
   "devDependencies": {
-
+    "babel-loader": "^8.2.2",
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-react": "^7.14.5",
+    "isomorphic-fetch": "^3.0.0",
+    "nodemon": "^2.0.12",
+    "sass": "^1.36.0",
+    "sass-loader": "^12.1.0",
+    "css-loader": "^6.2.0",
+    "style-loader": "^3.2.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
   }
 }

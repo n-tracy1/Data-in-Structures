@@ -1,7 +1,8 @@
 const path = require('path');
 
 module.exports = {
-    mode: 'production',
+    // mode: 'production',
+    mode: process.env.NODE_ENV,
     entry: './client/index.js',
     output: {
         path: path.join(__dirname, '/build'),
@@ -19,7 +20,7 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?/,
-                excluse: /node_modules/,
+                exclude: /node_modules/,
                 loader: 'babel-loader',
                 options: {
                     presets: ['@babel/preset-env', '@babel/preset-react']
