@@ -20,6 +20,10 @@ class InteractiveMenu extends Component {
                     <button id='addNode'>Add Node</button>
                     <button id='deleteNode'>Delete Node</button>
                     <button id='findValue'>Find Value</button>
+                    <button id='depthFirstPre'>Depth First Pre</button>
+                    <button id='depthFirstIn'>Depth First In</button>            
+                    <button id='depthFirstPost'>Depth First Post</button>            
+                    <button id='breadthFirst'>Breadth First</button>            
                 </div>
                 
             </form>

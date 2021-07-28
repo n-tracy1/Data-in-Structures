@@ -28,7 +28,7 @@ class DsContainer extends Component {
         if (this.props.dsType === false) {
             interactive = <div></div>
         }
-        else if (this.props.dataStructure !== undefined) {
+        else if (this.props.dsType !== undefined) {
             interactive = <div>
                 <InteractiveMenu dsType={this.props.dsType} interactiveClick={this.props.interactiveClick}/>
             </div>;

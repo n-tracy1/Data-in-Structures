@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import MainMenu from '../interactive/MainMenu';
 import DsContainer from './DsContainer';
+import BST from '../methods/BST';
 
 const dataStructures = {
-    BST: {
-        value: 10,
-        right: null,
-        left: null,
-    }
+    BST: BST
 }
 
 class MainContainer extends Component {
@@ -15,7 +12,8 @@ class MainContainer extends Component {
         super(props);
         this.state = {
             menuOpen: false,
-            dsType: false
+            dsType: false,
+            dataStructure: undefined
         };
         this.mainMenuClick = this.mainMenuClick.bind(this);
         this.dsTypeClick = this.dsTypeClick.bind(this);
@@ -24,24 +22,45 @@ class MainContainer extends Component {
 
     //top left main menu clicking functionality
     mainMenuClick() {
-        if (this.state.menuOpen === false) this.setState({menuOpen: true, dsType: false});
+        //if state.menuOpen is false, the menu won't display - clicking the menu icon will change it to true and display it as well as set dsType to false
+        if (this.state.menuOpen === false) this.setState({menuOpen: true, dsType: false, dataStructure: undefined});
         else this.setState({menuOpen: false})
-        return console.log(this.state.menuOpen);
+        return;
     }
 
     //drop down menu click functionality
     dsTypeClick(e) {
-        console.log(this.state);
-        console.log(e.target.textContent);
+        //assign to datastructure (ds) the text content of the button which corresponds to the datastructures object at top of current file
         let ds = e.target.textContent;
-        this.setState({dsType: ds, dataStructure: dataStructures[ds], menuOpen: false});
+        this.setState({dsType: ds,  menuOpen: false});
         return;
     }
 
     //data structure interactive menu click functionality - this may work with imported data for modularity
     interactiveClick(e) {
         e.preventDefault()
-        console.log(e);
+        // extract out the input from the text field, the type of functionality from the button clicked, and the data structure object in state for ease of use
+        const input = parseInt(e.target[0].value);
+        const functionality = e.nativeEvent.submitter.id;
+        const currDataStruct = this.state.dataStructure;
+        // this sets the initial ds on the first addNode click
+        if (currDataStruct === undefined && input !== '' && functionality === 'addNode') {
+            const newDs = new dataStructures[this.state.dsType](input)
+            this.setState({dataStructure: newDs});
+            console.log('Data structure has been set');
+            return;
+        }
+        //add nodes to BST
+        else if (functionality === 'addNode' && this.state.dataStructure !== undefined) {
+            currDataStruct.addNode(input);
+            this.setState({dataStructure: currDataStruct});
+        }
+        // then a bunch ds logic will follow based on what type of ds is being used
+        if (this.state.dataStructure !== undefined) {
+            console.log('input field value: ', input);
+            console.log('the data structure in state: ', this.state.dataStructure)
+            console.log('the value inside the data structure in state: ', this.state.dataStructure.value);
+        }
         return;
     }
 
