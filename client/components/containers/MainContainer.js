@@ -52,7 +52,7 @@ class MainContainer extends Component {
         }
         //add nodes to BST
         else if (functionality === 'addNode' && this.state.dataStructure !== undefined) {
-            currDataStruct.addNode(input);
+            currDataStruct.addNode(input, currDataStruct.style.top, currDataStruct.style.left);
             this.setState({dataStructure: currDataStruct});
         }
         // then a bunch ds logic will follow based on what type of ds is being used

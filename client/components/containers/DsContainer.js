@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import InteractiveMenu from '../interactive/InteractiveMenu';
+import Node from '../interactive/Nodes';
+
 
 class DsContainer extends Component {
     constructor(props) {
@@ -29,20 +31,41 @@ class DsContainer extends Component {
             interactive = <div></div>
         }
         else if (this.props.dsType !== undefined) {
-            interactive = <div>
+            interactive = 
+            <div>
                 <InteractiveMenu dsType={this.props.dsType} interactiveClick={this.props.interactiveClick}/>
             </div>;
         }
 
 
-//<InteractiveMenu />
+        //ARROWS site https://eliav2.github.io/react-xarrows/
+        //render nodes from ds
+        const nodes = [];
+        function nodeCreator(dsObject) {
+            //recrusively loop through all nodes in dsObject
+            nodes.push(
+                <div>
+                    <Node dataStructure={dsObject}/>
+                </div>
+            );
+            if (dsObject.left !== null) nodeCreator(dsObject.left);
+            if (dsObject.right !== null) nodeCreator(dsObject.right);
+            return
+        }
+        if (this.props.dataStructure !== undefined) {
+            nodeCreator(this.props.dataStructure);
+        }
+        
 
+
+        //<InteractiveMenu />
         return(
             <div className='DsContainer'>
                 {mainMenu}
                 <div className='menu'>
                     {interactive}
                 </div>
+                {nodes}
             </div>
         )
     }

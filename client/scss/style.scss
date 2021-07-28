@@ -3,8 +3,17 @@ $secondary: darken($primary, 20%);
 $tertiary: lighten($primary, 25%);
 $text: darken($primary, 30%);
 
+html {
+    margin: 0;
+}
+
 body {
     margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     color: $text;
 }
 
@@ -82,6 +91,28 @@ header {
     }
 
 }
+
+    
+
+    .nodes {
+        position: absolute;
+        background-color: $primary;
+        border: solid 2px $secondary;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            cursor: pointer;
+            background-color: darken($primary, 10%);
+        }
+    }
+
+
 
 .menu {
     
