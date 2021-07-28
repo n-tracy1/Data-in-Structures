@@ -14,11 +14,14 @@ class InteractiveMenu extends Component {
         //Will need to check what kind of dsType has been chosen - I think I'll have to hardcode all these out unfortunately
         else if (this.props.dsType === 'BST') {
             interactiveMenu = 
-            <form>
+            <form onSubmit={this.props.interactiveClick}>
                 <input type='text'></input>
-                <button>Add Node</button>
-                <button>Delete Node</button>
-                <button>Find Value</button>
+                <div>
+                    <button id='addNode'>Add Node</button>
+                    <button id='deleteNode'>Delete Node</button>
+                    <button id='findValue'>Find Value</button>
+                </div>
+                
             </form>
         }
  

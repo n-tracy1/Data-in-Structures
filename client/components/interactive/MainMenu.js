@@ -9,11 +9,12 @@ class MainMenu extends Component {
 
 
     render() {
-        const menuButton = <button onClick={this.props.mainMenuClick}>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </button>;
+        const menuButton = 
+            <button onClick={this.props.mainMenuClick}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>;
         return (
             <div id='mainMenu'>
                 {menuButton}

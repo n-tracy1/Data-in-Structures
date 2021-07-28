@@ -69,6 +69,7 @@ header {
         justify-content: center;
         background: $tertiary;
         border: 2px solid $secondary;
+        border-top: 0;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
 
@@ -82,16 +83,29 @@ header {
 }
 
 .menu {
-    position: absolute;
-    left: 0;
-    top: 35%;
     
     #InteractiveMenu {
-        // width: 100px;
-        // height: 200px;
         background: $tertiary;
-        display: flex;
-        flex-direction: row;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 1em;
+            border: solid 2px $secondary;
+            border-top: 0;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            align-items: center;
+
+            input{
+                width: 100px;
+            }
+
+            button {
+                margin: 1em 1em 0 1em;
+                padding: 1em;
+            }
+        }
     }
 
 }

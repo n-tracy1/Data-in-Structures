@@ -30,7 +30,7 @@ class DsContainer extends Component {
         }
         else if (this.props.dataStructure !== undefined) {
             interactive = <div>
-                <InteractiveMenu dsType={this.props.dsType}/>
+                <InteractiveMenu dsType={this.props.dsType} interactiveClick={this.props.interactiveClick}/>
             </div>;
         }
 
