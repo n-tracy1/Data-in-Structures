@@ -5,6 +5,7 @@ class Node extends Component {
         super(props);
     }
 
+
     render() {
         return (
             <div className='nodes' style={this.props.dataStructure.style}>

@@ -17,13 +17,14 @@ class InteractiveMenu extends Component {
             <form onSubmit={this.props.interactiveClick}>
                 <input type='text'></input>
                 <div>
-                    <button id='addNode'>Add Node</button>
-                    <button id='deleteNode'>Delete Node</button>
-                    <button id='findValue'>Find Value</button>
-                    <button id='depthFirstPre'>Depth First Pre</button>
-                    <button id='depthFirstIn'>Depth First In</button>            
-                    <button id='depthFirstPost'>Depth First Post</button>            
-                    <button id='breadthFirst'>Breadth First</button>            
+                    <button key='adn' id='addNode'>Add Node</button>
+                    <button key='deln' id='deleteNode'>Delete Node</button>
+                    <button key='fvb' id='findValue'>Find Value</button>
+                    <button key='dfpb' id='depthFirstPre'>Depth First Pre</button>
+                    <button key='dgib' id='depthFirstIn'>Depth First In</button>            
+                    <button key='dfpob' id='depthFirstPost'>Depth First Post</button>            
+                    <button key='bfb' id='breadthFirst'>Breadth First</button>  
+                    <button key='prbb' id='preBuilt'>Pre-Built</button>          
                 </div>
                 
             </form>

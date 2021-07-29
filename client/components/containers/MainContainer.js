@@ -39,10 +39,12 @@ class MainContainer extends Component {
     //data structure interactive menu click functionality - this may work with imported data for modularity
     interactiveClick(e) {
         e.preventDefault()
+        
         // extract out the input from the text field, the type of functionality from the button clicked, and the data structure object in state for ease of use
         const input = parseInt(e.target[0].value);
         const functionality = e.nativeEvent.submitter.id;
         const currDataStruct = this.state.dataStructure;
+        console.log('the interactive buttons have been clicked', functionality);
         // this sets the initial ds on the first addNode click
         if (currDataStruct === undefined && input !== '' && functionality === 'addNode') {
             const newDs = new dataStructures[this.state.dsType](input)
@@ -53,16 +55,20 @@ class MainContainer extends Component {
         //add nodes to BST
         else if (functionality === 'addNode' && this.state.dataStructure !== undefined) {
             currDataStruct.addNode(input, currDataStruct.style.top, currDataStruct.style.left);
+            this.setState({datastructure: currDataStruct});
             //place autosizer here
-            currDataStruct.autoBalancer();
-            this.setState({dataStructure: currDataStruct});
+            const tempDataStructure = currDataStruct.autoBalancer(this.state.dataStructure);
+            this.setState({dataStructure: tempDataStructure});
+        }
+
+        else if (functionality === 'preBuilt' /*&& this.state.dataStructure !== undefined*/) {
+            console.log('prebuilt has been clicked');
+            const newDs = new dataStructures[this.state.dsType](10)
+            newDs.preBuilt();
+            const tempDataStructure = newDs.autoBalancer(newDs);
+            this.setState({dataStructure: tempDataStructure});
         }
         // then a bunch ds logic will follow based on what type of ds is being used
-        if (this.state.dataStructure !== undefined) {
-            console.log('input field value: ', input);
-            console.log('the data structure in state: ', this.state.dataStructure)
-            console.log('the value inside the data structure in state: ', this.state.dataStructure.value);
-        }
         return;
     }
 
