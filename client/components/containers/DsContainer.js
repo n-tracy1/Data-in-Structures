@@ -13,12 +13,12 @@ class DsContainer extends Component {
         let mainMenu;
         if (this.props.menuOpen === true) {
             mainMenu = <div id='dropDown'>
-                            <button onClick={this.props.dsTypeClick}>BST</button>
-                            <button onClick={this.props.dsTypeClick}>Graph</button>
-                            <button onClick={this.props.dsTypeClick}>LL</button>
-                            <button onClick={this.props.dsTypeClick}>Queue</button>
-                            <button onClick={this.props.dsTypeClick}>Stack</button>
-                            <button onClick={this.props.dsTypeClick}>Tree</button>
+                            <button key='bst' onClick={this.props.dsTypeClick}>BST</button>
+                            <button key='gra' onClick={this.props.dsTypeClick}>Graph</button>
+                            <button key='ll' onClick={this.props.dsTypeClick}>LL</button>
+                            <button key='que' onClick={this.props.dsTypeClick}>Queue</button>
+                            <button key='sta' onClick={this.props.dsTypeClick}>Stack</button>
+                            <button key='tre' onClick={this.props.dsTypeClick}>Tree</button>
                         </div>;
         }
         else {
@@ -33,7 +33,7 @@ class DsContainer extends Component {
         else if (this.props.dsType !== undefined) {
             interactive = 
             <div>
-                <InteractiveMenu dsType={this.props.dsType} interactiveClick={this.props.interactiveClick}/>
+                <InteractiveMenu key='imenu' dsType={this.props.dsType} interactiveClick={this.props.interactiveClick}/>
             </div>;
         }
 
@@ -41,15 +41,15 @@ class DsContainer extends Component {
         //ARROWS site https://eliav2.github.io/react-xarrows/
         //render nodes from ds
         const nodes = [];
-        function nodeCreator(dsObject, counter = 0) {
+        function nodeCreator(dsObject, counter = 0, direction = 'r') {
             //recrusively loop through all nodes in dsObject
             nodes.push(
                 <div>
-                    <Node id='test' dataStructure={dsObject} />
+                    <Node key={direction} id='test' dataStructure={dsObject} />
                 </div>
             );
-            if (dsObject.left !== null) nodeCreator(dsObject.left, counter + 1);
-            if (dsObject.right !== null) nodeCreator(dsObject.right, counter + 1);
+            if (dsObject.left !== null) nodeCreator(dsObject.left, counter + 1, direction + 'l');
+            if (dsObject.right !== null) nodeCreator(dsObject.right, counter + 1, direction + 'r');
             return
         }
         if (this.props.dataStructure !== undefined) {
@@ -58,26 +58,26 @@ class DsContainer extends Component {
 
         //testing splitting these up so everything renders
         const lines = []
-        function lineCreator(dsObject) {
+        function lineCreator(dsObject, direction = 'l') {
             //recrusively loop through all nodes in dsObject
             //for some reason the lines using the normal dsObject.style.left and top are ofset by 50px
             if (dsObject.right !== null) {
                 nodes.push(
                     <svg>
-                        <line x1={parseInt(dsObject.style.left) + 25 + 'px'} y1={parseInt(dsObject.style.top) - 55 + 'px'} x2={parseInt(dsObject.right.style.left) + 25 + 'px'} y2={parseInt(dsObject.right.style.top) - 55 + 'px'} stroke='blue' strokeWidth='3.5'/>
+                        <line key={direction} x1={parseInt(dsObject.style.left) + 25 + 'px'} y1={parseInt(dsObject.style.top) - 55 + 'px'} x2={parseInt(dsObject.right.style.left) + 25 + 'px'} y2={parseInt(dsObject.right.style.top) - 55 + 'px'} stroke='blue' strokeWidth='3.5'/>
                     </svg>     
                     );
             }
             if (dsObject.left !== null) {
                 nodes.push(
                     <svg>
-                        <line x1={parseInt(dsObject.style.left) + 23 + 'px'} y1={parseInt(dsObject.style.top) - 55 + 'px'} x2={parseInt(dsObject.left.style.left) + 23 + 'px'} y2={parseInt(dsObject.left.style.top) - 55 + 'px'} stroke='blue' strokeWidth='3.5'/>
+                        <line key={direction} x1={parseInt(dsObject.style.left) + 23 + 'px'} y1={parseInt(dsObject.style.top) - 55 + 'px'} x2={parseInt(dsObject.left.style.left) + 23 + 'px'} y2={parseInt(dsObject.left.style.top) - 55 + 'px'} stroke='blue' strokeWidth='3.5'/>
                     </svg>     
                     );
             }
             
-            if (dsObject.left !== null) lineCreator(dsObject.left);
-            if (dsObject.right !== null) lineCreator(dsObject.right);
+            if (dsObject.left !== null) lineCreator(dsObject.left, direction + 'l');
+            if (dsObject.right !== null) lineCreator(dsObject.right, direction + 'r');
             return
         }
         if (this.props.dataStructure !== undefined) {
@@ -93,11 +93,7 @@ class DsContainer extends Component {
                     {interactive}
                 </div>
                 {nodes}
-                {/* <svg viewBox='0 0 100 100' style={{position: 'absolute'}}> */}
-                    {lines}
-                {/* </svg> */}
-                    
-                
+                {lines}
             </div>
         )
     }
