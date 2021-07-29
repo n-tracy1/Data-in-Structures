@@ -15,6 +15,7 @@ body {
     right: 0;
     bottom: 0;
     color: $text;
+    z-index: -5;
 }
 
 button {
@@ -74,6 +75,7 @@ header {
     height: 100%;
 
     #dropDown {
+        position: absolute;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -90,13 +92,35 @@ header {
         }
     }
 
+        
 }
 
+.lines {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -100;
+}
+
+svg {
+    position: absolute;
+    z-index: -99;
+    width: 100%;
+    height: 100%;
+}
+
+line {
+    z-index: -98;
+}
+       
     
 
     .nodes {
         position: absolute;
         background-color: $primary;
+        color: white;
         border: solid 2px $secondary;
         border-radius: 50%;
         width: 45px;
@@ -105,6 +129,7 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 50;
 
         &:hover {
             cursor: pointer;

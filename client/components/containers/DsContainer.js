@@ -41,21 +41,48 @@ class DsContainer extends Component {
         //ARROWS site https://eliav2.github.io/react-xarrows/
         //render nodes from ds
         const nodes = [];
-        function nodeCreator(dsObject) {
+        function nodeCreator(dsObject, counter = 0) {
             //recrusively loop through all nodes in dsObject
             nodes.push(
                 <div>
-                    <Node dataStructure={dsObject}/>
+                    <Node id='test' dataStructure={dsObject} />
                 </div>
             );
-            if (dsObject.left !== null) nodeCreator(dsObject.left);
-            if (dsObject.right !== null) nodeCreator(dsObject.right);
+            if (dsObject.left !== null) nodeCreator(dsObject.left, counter + 1);
+            if (dsObject.right !== null) nodeCreator(dsObject.right, counter + 1);
             return
         }
         if (this.props.dataStructure !== undefined) {
             nodeCreator(this.props.dataStructure);
         }
-        
+
+        //testing splitting these up so everything renders
+        const lines = []
+        function lineCreator(dsObject) {
+            //recrusively loop through all nodes in dsObject
+            //for some reason the lines using the normal dsObject.style.left and top are ofset by 50px
+            if (dsObject.right !== null) {
+                nodes.push(
+                    <svg>
+                        <line x1={parseInt(dsObject.style.left) + 25 + 'px'} y1={parseInt(dsObject.style.top) - 55 + 'px'} x2={parseInt(dsObject.right.style.left) + 25 + 'px'} y2={parseInt(dsObject.right.style.top) - 55 + 'px'} stroke='blue' strokeWidth='3.5'/>
+                    </svg>     
+                    );
+            }
+            if (dsObject.left !== null) {
+                nodes.push(
+                    <svg>
+                        <line x1={parseInt(dsObject.style.left) + 23 + 'px'} y1={parseInt(dsObject.style.top) - 55 + 'px'} x2={parseInt(dsObject.left.style.left) + 23 + 'px'} y2={parseInt(dsObject.left.style.top) - 55 + 'px'} stroke='blue' strokeWidth='3.5'/>
+                    </svg>     
+                    );
+            }
+            
+            if (dsObject.left !== null) lineCreator(dsObject.left);
+            if (dsObject.right !== null) lineCreator(dsObject.right);
+            return
+        }
+        if (this.props.dataStructure !== undefined) {
+            lineCreator(this.props.dataStructure);
+        }
 
 
         //<InteractiveMenu />
@@ -66,6 +93,11 @@ class DsContainer extends Component {
                     {interactive}
                 </div>
                 {nodes}
+                {/* <svg viewBox='0 0 100 100' style={{position: 'absolute'}}> */}
+                    {lines}
+                {/* </svg> */}
+                    
+                
             </div>
         )
     }
